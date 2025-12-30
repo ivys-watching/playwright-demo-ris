@@ -18,4 +18,5 @@ jobs:
           java-version: 25
 
       - name: Run tests
+        working-directory: e2e-tests
         run: mvn clean test
