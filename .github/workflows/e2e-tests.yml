@@ -5,7 +5,7 @@ on:
   pull_request:
 
 jobs:
-  test:
+  e2e:
     runs-on: ubuntu-latest
 
     steps:
@@ -17,6 +17,16 @@ jobs:
           distribution: temurin
           java-version: 25
 
-      - name: Run tests
+      - name: Build backend
+        working-directory: backend
+        run: mvn clean package -DskipTests
+
+      - name: Start backend
+        working-directory: backend
+        run: |
+          mvn spring-boot:run &
+          sleep 20
+
+      - name: Run E2E tests
         working-directory: e2e-tests
         run: mvn clean test
