@@ -17,15 +17,16 @@ jobs:
           distribution: temurin
           java-version: 25
 
-      - name: Build backend
-        working-directory: backend
-        run: mvn clean package -DskipTests
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
 
-      - name: Start backend
-        working-directory: backend
+      - name: Start frontend server
+        working-directory: playwright-demo-site
         run: |
-          mvn spring-boot:run &
-          sleep 20
+          node server.js &
+          sleep 10
 
       - name: Run E2E tests
         working-directory: e2e-tests
