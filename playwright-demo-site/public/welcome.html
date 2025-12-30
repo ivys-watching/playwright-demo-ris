@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Welcome – Playwright Demo</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <h1 data-testid="welcome-title">Welcome page</h1>
+      <p class="tagline">You successfully signed in.</p>
+    </header>
+
+    <main class="content">
+      <section class="card">
+        <h2>Welcome back</h2>
+        <p id="welcome-message" data-testid="welcome-message">
+          Loading your greeting...
+        </p>
+
+        <button id="back-button" type="button">Back to login</button>
+      </section>
+
+      <section class="card">
+        <h2>What to test</h2>
+        <ol>
+          <li>Assert that the URL contains <code>username=...</code>.</li>
+          <li>Assert the rendered welcome message.</li>
+          <li>Click “Back to login” and assert navigation.</li>
+        </ol>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <small>Playwright demo footer &middot; 2025</small>
+    </footer>
+
+    <script>
+      function getUsernameFromQuery() {
+        const params = new URLSearchParams(window.location.search);
+        return params.get('username') || '';
+      }
+
+      const username = getUsernameFromQuery();
+      const messageEl = document.getElementById('welcome-message');
+
+      if (username) {
+        messageEl.textContent = `Welcome, ${username}! You are now logged in.`;
+      } else {
+        messageEl.textContent = 'Welcome! (no username provided)';
+      }
+
+      document
+        .getElementById('back-button')
+        .addEventListener('click', () => {
+          window.location.href = 'index.html';
+        });
+    </script>
+  </body>
+</html>

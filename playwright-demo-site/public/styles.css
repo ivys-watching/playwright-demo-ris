@@ -1,0 +1,189 @@
+/* styles.css */
+:root {
+  --bg: #0f172a;
+  --bg-card: #1e293b;
+  --accent: #38bdf8;
+  --accent-soft: rgba(56, 189, 248, 0.15);
+  --text: #e5e7eb;
+  --muted: #9ca3af;
+  --error: #f97373;
+  --success: #4ade80;
+  --border-radius: 8px;
+  --shadow-soft: 0 10px 25px rgba(15, 23, 42, 0.5);
+  --font-sans: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: var(--font-sans);
+  background: radial-gradient(circle at top, #1d283a 0, var(--bg) 55%);
+  color: var(--text);
+  display: flex;
+  flex-direction: column;
+}
+
+.site-header {
+  padding: 2rem 1.5rem 1rem;
+  text-align: center;
+}
+
+.site-header h1 {
+  margin: 0 0 0.5rem;
+  font-size: 2rem;
+  letter-spacing: 0.04em;
+}
+
+.site-header .tagline {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+.content {
+  flex: 1;
+  display: grid;
+  grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr);
+  gap: 1.5rem;
+  padding: 0 1.5rem 2rem;
+  max-width: 960px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.card {
+  background: linear-gradient(135deg, var(--bg-card), #030712);
+  border-radius: var(--border-radius);
+  padding: 1.5rem;
+  box-shadow: var(--shadow-soft);
+  border: 1px solid rgba(148, 163, 184, 0.25);
+}
+
+.card h2 {
+  margin-top: 0;
+  margin-bottom: 0.75rem;
+  font-size: 1.2rem;
+}
+
+.card p {
+  margin-top: 0;
+  margin-bottom: 1rem;
+  color: var(--muted);
+}
+
+form {
+  display: grid;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+label {
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+
+input[type='text'],
+input[type='password'] {
+  padding: 0.5rem 0.75rem;
+  border-radius: 999px;
+  border: 1px solid rgba(148, 163, 184, 0.6);
+  background-color: rgba(15, 23, 42, 0.8);
+  color: var(--text);
+  outline: none;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease, background-color 0.15s ease;
+}
+
+input[type='text']::placeholder,
+input[type='password']::placeholder {
+  color: rgba(148, 163, 184, 0.7);
+}
+
+input[type='text']:focus,
+input[type='password']:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 1px var(--accent-soft);
+  background-color: rgba(15, 23, 42, 0.95);
+}
+
+button[type='submit'] {
+  margin-top: 0.5rem;
+  padding: 0.6rem 1rem;
+  border-radius: 999px;
+  border: none;
+  background: linear-gradient(135deg, var(--accent), #0ea5e9);
+  color: #0b1120;
+  font-weight: 600;
+  font-size: 0.95rem;
+  cursor: pointer;
+  justify-self: flex-start;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  box-shadow: 0 10px 20px rgba(56, 189, 248, 0.45);
+  transition: transform 0.1s ease, box-shadow 0.1s ease, filter 0.15s ease;
+}
+
+button[type='submit']:hover {
+  filter: brightness(1.05);
+  transform: translateY(-1px);
+  box-shadow: 0 14px 28px rgba(56, 189, 248, 0.55);
+}
+
+button[type='submit']:active {
+  transform: translateY(0);
+  box-shadow: 0 8px 18px rgba(56, 189, 248, 0.45);
+}
+
+.status {
+  font-size: 0.9rem;
+  padding: 0.45rem 0.75rem;
+  border-radius: 999px;
+  background-color: rgba(15, 23, 42, 0.8);
+  border: 1px solid transparent;
+}
+
+.status--idle {
+  color: var(--muted);
+}
+
+.status--error {
+  color: var(--error);
+  border-color: rgba(248, 113, 113, 0.6);
+  background-color: rgba(127, 29, 29, 0.3);
+}
+
+.status--success {
+  color: var(--success);
+  border-color: rgba(74, 222, 128, 0.6);
+  background-color: rgba(22, 101, 52, 0.3);
+}
+
+#todo-list {
+  margin: 0;
+  padding-left: 1.25rem;
+  color: var(--text);
+}
+
+#todo-list li + li {
+  margin-top: 0.35rem;
+}
+
+.site-footer {
+  padding: 0.75rem 1.5rem 1.25rem;
+  text-align: center;
+  color: var(--muted);
+  font-size: 0.8rem;
+}
+
+/* Small screens */
+@media (max-width: 700px) {
+  .content {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}

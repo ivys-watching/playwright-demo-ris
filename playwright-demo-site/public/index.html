@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Playwright Demo Page</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <h1 data-testid="page-title">Playwright E2E Demo</h1>
+      <p class="tagline">A tiny page for end‑to‑end tests.</p>
+    </header>
+
+    <main class="content">
+      <section class="card" aria-labelledby="card-heading">
+        <h2 id="card-heading">Login simulation</h2>
+        <p>
+          Use this form to test filling inputs, clicking buttons, and asserting text.
+        </p>
+
+        <form id="login-form">
+          <label for="username">Username</label>
+          <input
+            id="username"
+            name="username"
+            type="text"
+            placeholder="Enter username"
+            autocomplete="off"
+          />
+
+          <label for="password">Password</label>
+          <input
+            id="password"
+            name="password"
+            type="password"
+            placeholder="Enter password"
+            data-testid="password-field"
+          />
+
+          <button type="submit" id="login-button">Sign in</button>
+        </form>
+
+        <p id="status-message" role="status" class="status status--idle" data-testid="status-message">
+          Not logged in.
+        </p>
+      </section>
+
+      <section class="card" aria-labelledby="list-heading">
+        <h2 id="list-heading">Checklist</h2>
+        <p>Use this list to assert item presence and order.</p>
+        <ol id="todo-list">
+          <li data-testid="item-1">Open the demo page</li>
+          <li data-testid="item-2">Fill out the login form</li>
+          <li data-testid="item-3">Assert the success message</li>
+        </ol>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <small>Playwright demo footer &middot; 2025</small>
+    </footer>
+
+    <script>
+        const form = document.getElementById('login-form');
+        const status = document.getElementById('status-message');
+
+        form.addEventListener('submit', (event) => {
+            event.preventDefault();
+            const username = document.getElementById('username').value.trim();
+
+            if (!username) {
+            status.textContent = 'Please enter a username.';
+            status.className = 'status status--error';
+            return;
+            }
+
+            // optional inline feedback before redirect
+            status.textContent = `Welcome, ${username}! Redirecting...`;
+            status.className = 'status status--success';
+
+            // redirect to welcome.html with username in query string
+            const encoded = encodeURIComponent(username);
+            window.location.href = `welcome.html?username=${encoded}`;
+        });
+    </script>
+
+  </body>
+</html>
